@@ -5,6 +5,7 @@ import folium
 from streamlit_folium import st_folium
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 
 # Generate sample population and GDP data
@@ -32,9 +33,12 @@ def generate_data(min_population, max_population):
 
 
 # Load Malaysia map from the same folder as this script
+from pathlib import Path
+
 @st.cache_data
 def load_map():
-    return gpd.read_file("my.json")
+    map_path = Path(__file__).parent / "my.json"
+    return gpd.read_file(map_path)
 
 
 # Plot the choropleth map
